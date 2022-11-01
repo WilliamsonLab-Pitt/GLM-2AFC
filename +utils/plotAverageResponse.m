@@ -5,7 +5,8 @@ nStims      = size(cResponse,3);
 % nFrames     = size(cResponse,2);
 colors      = ["b","b","b","b","w","r","r","r","r"];
 xAx         = ((cutIn)-firstFrame)/fs;
-axLims      = [min(xAx),max(xAx),0,0.6];
+axLims      = [min(xAx),max(xAx),min(cResponse,[],'all'),max(cResponse,[],'all')];
+% axLims      = [min(xAx),max(xAx),0,0.6];
 
 for ii = 1:nClusters
     for jj = 1:nStims

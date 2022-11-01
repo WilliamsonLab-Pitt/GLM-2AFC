@@ -1,12 +1,13 @@
-function [clusterResponse,nClusters,d] = getSessionData(analysisFolder)
+function [clusterResponse,nClusters,d,clustID] = getSessionData(analysisFolder,clusterFile)
 % Prep file names. Make sure they match if there is an error
-listFile        = [analysisFolder,filesep,'cluster_identities.mat'];
+listFile        = [analysisFolder,filesep,clusterFile,'.mat'];
 analysisFile    = [analysisFolder,filesep,'initial_analysis.mat'];
 
-load(listFile,'ET_cluster_idx');
+load(listFile,'clustID');
+% load(listFile,'ET_cluster_idx'); clustID = ET_cluster_idx;
 load(analysisFile,'d');
 
-nClusters = numel(unique(ET_cluster_idx));
+nClusters = numel(unique(clustID));
 [~,nFrames,nTrials] = size(d.spike_zscores);
 
 clusterResponse = zeros(nClusters,nFrames,nTrials);
@@ -14,7 +15,7 @@ clusterResponse = zeros(nClusters,nFrames,nTrials);
 normalized_spike_zscores = utils.normalizeCellSpikes(d.spike_zscores); % get rescaled spikes (from 0 to 1)
 
 for ii = 1:nClusters
-    currentResponse         = normalized_spike_zscores(ET_cluster_idx==ii,:,:); % use rescaled data, not raw
+    currentResponse         = normalized_spike_zscores(clustID==ii,:,:); % use rescaled data, not raw
     clusterResponse(ii,:,:) = mean(currentResponse);
 end
 
