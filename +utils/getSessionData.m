@@ -3,8 +3,8 @@ function [clusterResponse,nClusters,d,clustID] = getSessionData(analysisFolder,c
 listFile        = [analysisFolder,filesep,clusterFile,'.mat'];
 analysisFile    = [analysisFolder,filesep,'initial_analysis.mat'];
 
-load(listFile,'clustID');
-% load(listFile,'ET_cluster_idx'); clustID = ET_cluster_idx;
+% load(listFile,'clustID');
+load(listFile,'ET_cluster_idx'); clustID = ET_cluster_idx;
 load(analysisFile,'d');
 
 nClusters = numel(unique(clustID));
