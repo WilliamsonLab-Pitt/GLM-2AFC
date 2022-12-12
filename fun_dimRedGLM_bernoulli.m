@@ -21,7 +21,8 @@ parse(p,varargin{:})
 
 
 %% Variable Setup
-% Deal configuration variables
+% create variables from config, one variable with the name of each field of
+% config, each one with the contents of each field in the structure
 cellfun(@(x,y) assignin('caller',x,y),fieldnames(config),struct2cell(config));
 
 analysisFolder = [config.analysisFolder,filesep,'MAT'];
