@@ -14,7 +14,7 @@
 clear; close all; clc
 
 nClusters   = 8;
-nFrames     = 200;
+nFrames     = 200; % frames per trial
 nTrials     = 153;
 nChoices    = 4;
 nStims      = 9;
